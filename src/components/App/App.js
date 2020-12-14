@@ -8,13 +8,13 @@ export default function App() {
     useEffect(() => {
         const key = localStorage.getItem('api.themoviedb.org.api_key');
 
-        setApiKey(String(key).trim().toString());
+        setApiKey(String(key || '').trim().toString());
     }, []);
 
     const handleApiKeyChanged = key => {
         setApiKey(key);
 
-        localStorage.setItem('api.themoviedb.org.api_key', String(key).trim().toString());
+        localStorage.setItem('api.themoviedb.org.api_key', String(key || '').trim().toString());
     };
 
     const api = tmdb(apiKey);
