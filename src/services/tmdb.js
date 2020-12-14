@@ -6,7 +6,7 @@ const tmdb = apiKey => {
     });
 
     return {
-        get: async url => connection.get(`${url}?api_key=${String(apiKey).trim()}`),
+        get: async url => connection.get(`${url}?api_key=${String(apiKey || '<<api_key>>').trim()}`),
     }
 };
 
