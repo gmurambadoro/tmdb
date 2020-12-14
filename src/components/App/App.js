@@ -4,6 +4,7 @@ import Layout from "../Layout/Layout";
 
 export default function App() {
     const [apiKey, setApiKey] = useState('');
+    const [configuration, setConfiguration] = useState(null);
 
     useEffect(() => {
         const key = localStorage.getItem('api.themoviedb.org.api_key');
@@ -17,9 +18,30 @@ export default function App() {
         localStorage.setItem('api.themoviedb.org.api_key', String(key || '').trim().toString());
     };
 
-    const api = tmdb(apiKey);
+    useEffect(() => {
+        if (!apiKey) {
+            localStorage.setItem('api.themoviedb.org.configuration.images', JSON.stringify({}));
+            return;
+        }
+
+        tmdb(apiKey)
+            .get('/configuration')
+            .then(data => {
+                const {images} = data.data;
+                setConfiguration(images);
+            })
+            .catch(err => {
+                setConfiguration(null);
+
+                console.error(err)
+            });
+    }, [apiKey]);
 
     return (
-        <Layout handleApiKeyChanged={handleApiKeyChanged} apiKey={apiKey} api={api} />
+        <Layout
+            handleApiKeyChanged={handleApiKeyChanged}
+            apiKey={apiKey}
+            configuration={configuration ? configuration : null}
+        />
     );
 }

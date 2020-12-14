@@ -1,11 +1,21 @@
 import React from "react";
 import {Card} from "react-bootstrap";
 
-export default function Movie({movie}) {
+export default function Movie({movie, configuration}) {
     const {title, backdrop_path: backdropPath, release_date: releaseDate} = movie;
+
+    let imageSrc = null;
+
+    if (configuration) {
+        const {base_url} = configuration;
+        const [imgSize] = configuration['backdrop_sizes'];
+
+        imageSrc = `${base_url}${imgSize}${backdropPath}`;
+    }
 
     return (
         <Card className={"m-1"}>
+            <Card.Img src={imageSrc} />
             <Card.Body>
                 <h5>{title}</h5>
                 <p className="card-text">{releaseDate}</p>

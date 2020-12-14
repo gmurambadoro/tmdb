@@ -7,7 +7,7 @@ import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import TopRated from "../TopRated/TopRated";
 import NotFound from "../Error/NotFound";
 
-export default function Layout({ handleApiKeyChanged, apiKey, api }) {
+export default function Layout({ handleApiKeyChanged, apiKey, configuration }) {
     const setApiKey = () => {
         const key = prompt('Enter your API Key: ');
 
@@ -43,7 +43,7 @@ export default function Layout({ handleApiKeyChanged, apiKey, api }) {
                 <Container>
                     <Switch>
                         <Route path="/" exact>
-                            <TopRated apiKey={apiKey}  />
+                            <TopRated apiKey={apiKey} configuration={configuration}  />
                         </Route>
                         <Route component={NotFound} />
                     </Switch>
