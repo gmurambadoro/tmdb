@@ -6,15 +6,9 @@ export default function App() {
     const [apiKey, setApiKey] = useState('');
 
     useEffect(() => {
-        setApiKey(String(localStorage.getItem('api.themoviedb.org.api_key')).trim().toString());
-    }, []);
+        const key = localStorage.getItem('api.themoviedb.org.api_key');
 
-    useEffect(() => {
-        const api = tmdb();
-
-        api.get('/movie/top_rated')
-            .then(data => console.log(data.data))
-            .catch(err => console.log(err));
+        setApiKey(String(key).trim().toString());
     }, []);
 
     const handleApiKeyChanged = key => {
@@ -23,7 +17,9 @@ export default function App() {
         localStorage.setItem('api.themoviedb.org.api_key', String(key).trim().toString());
     };
 
+    const api = tmdb(apiKey);
+
     return (
-        <Layout handleApiKeyChanged={handleApiKeyChanged} apiKey={apiKey} />
+        <Layout handleApiKeyChanged={handleApiKeyChanged} apiKey={apiKey} api={api} />
     );
 }
