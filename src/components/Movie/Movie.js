@@ -4,8 +4,6 @@ import {Card} from "react-bootstrap";
 export default function Movie({movie}) {
     const {title, backdrop_path: backdropPath, release_date: releaseDate} = movie;
 
-    console.log(movie);
-
     return (
         <Card className={"m-1"}>
             <Card.Body>
