@@ -4,6 +4,7 @@ import {Badge, Col} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Movie from "../Movie/Movie";
 import Error from "../Error/Error";
+import {Link} from "react-router-dom";
 
 export default function TopRated({ apiKey, configuration }) {
     const [movies, setMovies] = useState([]);

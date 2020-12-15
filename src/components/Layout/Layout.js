@@ -4,8 +4,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
-import TopRated from "../TopRated/TopRated";
+import TopRated from "../Pages/TopRated";
 import NotFound from "../Error/NotFound";
+import Movie from "../Pages/Movie";
 
 export default function Layout({ handleApiKeyChanged, apiKey, configuration }) {
     const setApiKey = () => {
@@ -42,9 +43,16 @@ export default function Layout({ handleApiKeyChanged, apiKey, configuration }) {
             <main>
                 <Container>
                     <Switch>
-                        <Route path="/" exact>
-                            <TopRated apiKey={apiKey} configuration={configuration}  />
-                        </Route>
+                        <Route
+                            path="/"
+                            exact
+                            render={props => <TopRated {...props}  apiKey={apiKey} configuration={configuration}  />}
+                        />
+                        <Route
+                            path={"/movie/:id"}
+                            exact
+                            render={props => <Movie {...props} apiKey={apiKey} />}
+                        />
                         <Route component={NotFound} />
                     </Switch>
                 </Container>

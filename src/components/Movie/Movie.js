@@ -1,25 +1,21 @@
 import React from "react";
 import {Card} from "react-bootstrap";
+import {imageUrl} from "../../services/helpers";
+import {Link} from "react-router-dom";
 
 export default function Movie({movie, configuration}) {
-    const {title, backdrop_path: backdropPath, release_date: releaseDate} = movie;
-
-    let imageSrc = null;
-
-    if (configuration) {
-        const {base_url} = configuration;
-        const [imgSize] = configuration['backdrop_sizes'];
-
-        imageSrc = `${base_url}${imgSize}${backdropPath}`;
-    }
+    const {id, title, backdrop_path: backdropPath, release_date: releaseDate, popularity} = movie;
 
     return (
-        <Card className={"m-1"}>
-            <Card.Img src={imageSrc} />
-            <Card.Body>
+        <Card className={"m-1 text-white"} as={Link} to={`/movie/${id}`}>
+            <Card.Img src={imageUrl(configuration, backdropPath)} />
+            <Card.ImgOverlay>
                 <h5>{title}</h5>
                 <p className="card-text">{releaseDate}</p>
-            </Card.Body>
+                <p className={"card-text"}>
+                    <i className="fas fa-heart" /> {popularity}
+                </p>
+            </Card.ImgOverlay>
         </Card>
     );
 };
