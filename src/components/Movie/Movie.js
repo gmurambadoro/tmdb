@@ -11,8 +11,12 @@ export default function Movie({movie, configuration}) {
             <Card.Img src={imageUrl(configuration, backdropPath)} />
             <Card.ImgOverlay>
                 <h5>{title}</h5>
-                <p className="card-text">{releaseDate}</p>
-                <p className={"card-text"}>
+
+                <p>
+                    <i className="fas fa-calendar-alt"/> {releaseDate}
+                </p>
+
+                <p>
                     <i className="fas fa-heart" /> {popularity}
                 </p>
             </Card.ImgOverlay>
