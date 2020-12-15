@@ -7,7 +7,7 @@ export default function Movie({movie, configuration}) {
     const {id, title, backdrop_path: backdropPath, release_date: releaseDate, popularity} = movie;
 
     return (
-        <Card className={"m-1 text-white"} as={Link} to={`/movie/${id}`}>
+        <Card className={"m-1 text-white"} as={Link} to={`/movie/${id}`} title={title}>
             <Card.Img src={imageUrl(configuration, backdropPath)} />
             <Card.ImgOverlay>
                 <h5>{title}</h5>
